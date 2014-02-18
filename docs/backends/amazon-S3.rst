@@ -58,6 +58,12 @@ To allow ``django-admin.py`` collectstatic to automatically put your static file
 
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
+``AWS_FAST_COLLECTSTATIC`` (Defaults to ``False``)
+
+django-storages ships with a custom ``collectstatic`` management command which can be enabled by setting it to ``True``. This management command overrides staticfiles' collectstatic to decide about file changes by comparing MD5 signatures instead of last modified times. This significantly speeds up the process when using Amazon S3 as a remote backend.
+
+Please note that in order for this management command to be picked up by Django, ``storages`` needs to come after ``django.contrib.staticfiles`` in your ``INSTALLED_APPS``.
+
 Fields
 ------
 
